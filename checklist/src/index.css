@@ -832,7 +832,7 @@ a {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0.5rem;
+          padding: 1rem;
 
           > :nth-child(1) {
             display: flex;
@@ -853,6 +853,11 @@ a {
                 font-size: 1.4rem;
               }
             }
+          }
+
+          > :last-child {
+            height: 6rem;
+            width: 6rem;
           }
         }
       }
