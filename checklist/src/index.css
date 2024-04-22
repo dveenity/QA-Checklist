@@ -620,8 +620,8 @@ a {
   display: flex;
   flex-flow: column;
   gap: 2rem;
-  max-height: 100vh;
-  max-height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
 
   .notifications-body {
     display: flex;
@@ -1126,6 +1126,10 @@ a {
       select {
         padding: 0.4rem;
         border-radius: 1rem;
+
+        option {
+          color: black;
+        }
       }
 
       > :last-child {
@@ -1172,6 +1176,8 @@ a {
 
 /* STYLING PROFILE ROUTE */
 .profile {
+  min-height: 100vh;
+  min-height: 100svh;
   background-color: whitesmoke;
   display: flex;
   flex-flow: column;
