@@ -33,7 +33,7 @@ const Home = () => {
   if (isError || notificationsError || !data) {
     // logout if error
     return (
-      <div>
+      <div className="fetch-error">
         Error fetching data <Logout /> and try again
       </div>
     );

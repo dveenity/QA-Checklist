@@ -52,6 +52,8 @@ const Notifications = () => {
         {hasNotifications ? (
           <ul className="notifications-list">
             {filteredNonSelfNotifications.map((notification) => {
+              let time = new Date(notification.createdAt).toLocaleDateString();
+
               return (
                 <li key={notification._id}>
                   <Link to="/manageChecklist">
@@ -60,7 +62,7 @@ const Notifications = () => {
                     </h2>
                     <p>
                       <IoAlarmOutline />
-                      {new Date(notification.time).toLocaleString()}
+                      {time}
                     </p>
                   </Link>
                 </li>

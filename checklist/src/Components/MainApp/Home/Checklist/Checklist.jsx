@@ -305,7 +305,7 @@ const Checklist = () => {
                     <button onClick={toggleUpdateForm}>Close</button>
                   </div>
                 </form>
-                <p>{checklistEntryMessage}</p>
+                <p className="results-display">{checklistEntryMessage}</p>
               </div>
             )}
           </div>
@@ -499,7 +499,7 @@ const Checklist = () => {
               <button onClick={toggleChecklistDetails}>Close</button>
             </div>
           </form>
-          <p className="error-message">{resultMessage}</p>
+          <p className="results-display">{resultMessage}</p>
         </div>
       )}
     </div>

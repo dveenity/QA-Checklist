@@ -73,7 +73,7 @@ const CreateChecklist = () => {
           Create
         </button>
       </form>
-      <p>{resultMessage}</p>
+      <p className="error-display">{resultMessage}</p>
     </div>
   );
 };
