@@ -1,10 +1,7 @@
-// import react hook form for handling the form
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import ButtonLoad from "../../../Animations/ButtonLoad";
-
-// axios to post form data
 import axios from "axios";
-import { useState } from "react";
 import HeaderGoBack from "../../../Custom/HeaderGoBack";
 
 const serVer = `https://checklist-app-backend.vercel.app`;
@@ -15,7 +12,6 @@ const CreateChecklist = () => {
   const [resultMessage, setResultMessage] = useState("");
   const [createBtn, setCreateBtn] = useState("Create");
 
-  // react form
   const form = useForm();
   const { register, handleSubmit, formState, reset } = form;
   const { errors, isSubmitting } = formState;
@@ -34,27 +30,25 @@ const CreateChecklist = () => {
       );
 
       reset();
-
       setResultMessage(response.data);
     } catch (error) {
       setResultMessage(error.response.data);
     } finally {
-      setTimeout(() => {
-        setResultMessage("");
-      }, 3000);
-
       setCreateBtn("Create");
     }
   };
 
   const onError = () => {
     setResultMessage("Failed to submit, check inputs and try again");
-
-    // Hide the message after 2 seconds
-    setTimeout(() => {
-      setResultMessage("");
-    }, 2000);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setResultMessage("");
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [resultMessage]);
 
   return (
     <div className="createChecklist">
@@ -74,7 +68,7 @@ const CreateChecklist = () => {
           <textarea
             id="description"
             {...register("description", {
-              required: "description is required",
+              required: "Description is required",
             })}
           />
           <p>{errors.description?.message}</p>
@@ -83,7 +77,9 @@ const CreateChecklist = () => {
           {createBtn}
         </button>
       </form>
-      <p className="error-display">{resultMessage}</p>
+      <p className={`error-display ${resultMessage ? "show" : ""}`}>
+        {resultMessage}
+      </p>
     </div>
   );
 };
