@@ -20,6 +20,10 @@
   --header-bg: rgb(224, 224, 224);
 }
 
+body {
+  background-color: rgb(199, 199, 199);
+}
+
 /* STYLING CUSTOM COMPONENTS */
 /* Navigation */
 .navigation {
@@ -191,6 +195,7 @@ a {
 
 /* STYLING GENESIS */
 .genesis {
+  background-color: white;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
@@ -462,7 +467,7 @@ a {
 
 /* STYLING HOME ROUTE */
 .home {
-  background-color: rgb(230, 230, 230);
+  background-color: white;
   min-height: 100vh;
   min-height: 100svh;
 
@@ -616,7 +621,7 @@ a {
 
 /* STYLING NOTIFICATIONS ROUTE */
 .notifications {
-  background-color: whitesmoke;
+  background-color: white;
   display: flex;
   flex-flow: column;
   gap: 2rem;
@@ -669,6 +674,9 @@ a {
 
 /* STYLING NEW USERS ROUTE */
 .new-users {
+  background-color: white;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-flow: column;
   gap: 2rem;
@@ -747,6 +755,9 @@ a {
 
 /* CREATE A NEW CHECKLIST */
 .createChecklist {
+  background-color: white;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -796,7 +807,7 @@ a {
 
 /* STYLING CHECKLIST MANAGEMENT ROUTE */
 .checklist-management {
-  background-color: whitesmoke;
+  background-color: white;
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -907,6 +918,9 @@ a {
 
 /* STYLING CHECKLIST ROUTE */
 .checklist {
+  background-color: white;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -1178,7 +1192,7 @@ a {
 .profile {
   min-height: 100vh;
   min-height: 100svh;
-  background-color: whitesmoke;
+  background-color: white;
   display: flex;
   flex-flow: column;
   align-items: center;

@@ -2,6 +2,7 @@
   display: block;
   width: 10em;
   height: 10em;
+  background-color: rgb(199, 199, 199);
 
   position: fixed;
   top: 50%;
