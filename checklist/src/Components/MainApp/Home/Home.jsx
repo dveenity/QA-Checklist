@@ -30,7 +30,7 @@ const Home = () => {
     }
   }, [data, logout]);
 
-  if (isError || notificationsError || !data) {
+  if (isError || notificationsError) {
     // logout if error
     return (
       <div className="fetch-error">

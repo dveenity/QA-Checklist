@@ -41,6 +41,8 @@
   z-index: 2;
 
   li {
+    border-radius: 1.5rem;
+
     a {
       padding: 0.5rem;
       font-size: clamp(1.3rem, 4vw, 1.7rem);
@@ -51,6 +53,7 @@
   }
 
   .active {
+    border-radius: 1.5rem;
     color: black;
     background-color: white;
     font-size: clamp(1.5rem, 5vw, 2rem);
