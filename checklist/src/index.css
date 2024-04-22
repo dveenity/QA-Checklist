@@ -79,9 +79,10 @@
   align-items: center;
   justify-content: space-between;
   background-color: rgb(160, 160, 160);
+  padding: 0.5rem;
 
   h1 {
-    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
     font-weight: 300;
     color: black;
   }
@@ -461,6 +462,10 @@ a {
 
 /* STYLING HOME ROUTE */
 .home {
+  background-color: rgb(230, 230, 230);
+  min-height: 100vh;
+  min-height: 100svh;
+
   .home-header {
     display: flex;
     justify-content: space-between;
@@ -611,6 +616,7 @@ a {
 
 /* STYLING NOTIFICATIONS ROUTE */
 .notifications {
+  background-color: whitesmoke;
   display: flex;
   flex-flow: column;
   gap: 2rem;
@@ -790,6 +796,9 @@ a {
 
 /* STYLING CHECKLIST MANAGEMENT ROUTE */
 .checklist-management {
+  background-color: whitesmoke;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -1163,6 +1172,7 @@ a {
 
 /* STYLING PROFILE ROUTE */
 .profile {
+  background-color: whitesmoke;
   display: flex;
   flex-flow: column;
   align-items: center;

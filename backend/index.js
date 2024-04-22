@@ -182,9 +182,6 @@ app.post("/createChecklist", async (req, res) => {
       author: author.name,
     });
 
-    // save the new checklist to db
-    await newChecklist.save();
-
     // Generate notification messages and save to db
     const notificationMessage = `${author.name} created a new checklist ${checklistName}. Check it out!`;
 
@@ -192,6 +189,9 @@ app.post("/createChecklist", async (req, res) => {
     await Notifications.create({
       message: notificationMessage,
     });
+
+    // save the new checklist to db
+    await newChecklist.save();
 
     res.status(200).send("Success");
   } catch (error) {
@@ -336,7 +336,6 @@ app.post("/checklistFormUpdate", async (req, res) => {
   }
 });
 
-// Route to delete checklist by admin
 app.delete("/deleteChecklist/:checklistId", async (req, res) => {
   try {
     // Get checklist ID from parameters
@@ -348,6 +347,14 @@ app.delete("/deleteChecklist/:checklistId", async (req, res) => {
     if (!deletedChecklist) {
       return res.status(404).send("Checklist not found");
     }
+
+    // Get the checklist name
+    const checklistName = deletedChecklist.checklistName;
+
+    // Find and delete the notification containing the checklist name
+    await Notifications.findOneAndDelete({
+      message: { $regex: checklistName, $options: "i" }, // Case-insensitive regex match for checklist name in the message
+    });
 
     res.status(200).send("Checklist item deleted successfully");
   } catch (error) {
