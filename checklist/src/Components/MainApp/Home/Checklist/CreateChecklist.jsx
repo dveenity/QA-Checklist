@@ -1,5 +1,6 @@
 // import react hook form for handling the form
 import { useForm } from "react-hook-form";
+import ButtonLoad from "../../../Animations/ButtonLoad";
 
 // axios to post form data
 import axios from "axios";
@@ -8,8 +9,11 @@ import HeaderGoBack from "../../../Custom/HeaderGoBack";
 
 const serVer = `https://checklist-app-backend.vercel.app`;
 
+const token = localStorage.getItem("qc-users");
+
 const CreateChecklist = () => {
   const [resultMessage, setResultMessage] = useState("");
+  const [createBtn, setCreateBtn] = useState("Create");
 
   // react form
   const form = useForm();
@@ -17,8 +21,8 @@ const CreateChecklist = () => {
   const { errors, isSubmitting } = formState;
 
   const onSubmit = async (data) => {
+    setCreateBtn(<ButtonLoad />);
     const { checklistName, description } = data;
-    const token = localStorage.getItem("qc-users");
 
     try {
       const response = await axios.post(
@@ -31,9 +35,15 @@ const CreateChecklist = () => {
 
       reset();
 
-      return response;
+      setResultMessage(response.data);
     } catch (error) {
-      console.log(error);
+      setResultMessage(error.response.data);
+    } finally {
+      setTimeout(() => {
+        setResultMessage("");
+      }, 3000);
+
+      setCreateBtn("Create");
     }
   };
 
@@ -70,7 +80,7 @@ const CreateChecklist = () => {
           <p>{errors.description?.message}</p>
         </div>
         <button type="submit" disabled={isSubmitting}>
-          Create
+          {createBtn}
         </button>
       </form>
       <p className="error-display">{resultMessage}</p>
