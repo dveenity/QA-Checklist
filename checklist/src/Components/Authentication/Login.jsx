@@ -11,7 +11,7 @@ import axios from "axios";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import ButtonLoad from "../Animations/ButtonLoad";
 
-const serVer = `http://localhost:7722`;
+const serVer = `https://checklist-app-backend.vercel.app`;
 
 const Login = () => {
   // react form

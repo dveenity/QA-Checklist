@@ -1,4 +1,4 @@
-const serVer = `http://localhost:7722`;
+const serVer = `https://checklist-app-backend.vercel.app`;
 const token = localStorage.getItem("qc-users");
 
 // fetch logged in user
