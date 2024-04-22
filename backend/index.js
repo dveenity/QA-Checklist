@@ -250,37 +250,6 @@ app.get("/fetchUserEntry", async (req, res) => {
   }
 });
 
-// server route to update Checklist items
-app.post("/createChecklist", async (req, res) => {
-  try {
-    const userId = req.userId;
-    // get data from frontend
-    const { checklistName, description } = req.body;
-
-    // validate data
-    if (!checklistName || !description) {
-      return res.status(400).send("All fields are required");
-    }
-
-    // find admin name
-    const author = await User.findById(userId);
-
-    // create new checklist
-    const newChecklist = new Checklist({
-      checklistName,
-      description,
-      author: author.name,
-    });
-
-    // save the new checklist to db
-    await newChecklist.save();
-
-    res.status(200).send("Success");
-  } catch (error) {
-    res.status(500).send("Internal server error.");
-  }
-});
-
 // server route to display all checklist
 app.get("/fetchChecklists", async (req, res) => {
   try {

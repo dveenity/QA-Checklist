@@ -110,19 +110,19 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+/* STYLING DISPLAY RESULTS */
 .error-display {
   position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #ff2c2c;
-  padding: 10px 20px;
+  padding: 0.5rem 20px;
   border-radius: 5px;
   color: white;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-
 .error-display.show {
   opacity: 1;
 }
@@ -1274,21 +1274,6 @@ a {
     justify-content: end;
     padding: 1rem;
   }
-}
-
-/* STYLING DISPLAY RESULTS */
-.results-display {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 10vh;
-  margin: 0 auto;
-  background-color: red;
-  color: white;
-  border-radius: 0.5rem;
-  width: 10rem;
-  display: flex;
-  justify-content: center;
 }
 
 /* Fix zoom bug on clicking input on mobile devices */

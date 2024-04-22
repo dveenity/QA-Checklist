@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import PageLoader from "../../../../Animations/PageLoader";
 import { fetchUsers } from "../../../../Hooks/useFetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import HeaderGoBack from "../../../../Custom/HeaderGoBack";
 import ButtonLoad from "../../../../Animations/ButtonLoad";
@@ -15,6 +15,17 @@ const Approved = () => {
     {}
   );
   const [deleteButtonStates, setDeleteButtonStates] = useState({});
+
+  useEffect(() => {
+    if (resultMsg) {
+      const timeoutId = setTimeout(() => {
+        setResultMsg(""); // Clear the message after 3 seconds
+      }, 3000);
+
+      // Cleanup function to clear the timeout when the component unmounts or resultMsg changes
+      return () => clearTimeout(timeoutId);
+    }
+  }, [resultMsg]);
 
   const { data, isLoading, isError, refetch } = useQuery("users", fetchUsers);
 
@@ -45,10 +56,6 @@ const Approved = () => {
         ...prevStates,
         [approvedUser._id]: "Update Position",
       }));
-
-      setTimeout(() => {
-        setResultMsg("");
-      }, 3000);
     }
   };
 
@@ -72,10 +79,6 @@ const Approved = () => {
         ...prevStates,
         [approvedUser._id]: "delete",
       }));
-
-      setTimeout(() => {
-        setResultMsg("");
-      }, 3000);
     }
   };
 
@@ -87,7 +90,6 @@ const Approved = () => {
   // Check if there are any approved users
   const hasApprovedUsers = approvedUsers.length > 0;
 
-  // Render either the list of approved users or "No approved users" message
   return (
     <div className="new-users">
       <HeaderGoBack h1="Approved Users" />
@@ -156,7 +158,7 @@ const Approved = () => {
           <div>No approved users</div>
         )}
       </div>
-      <p className="results-display">{resultMsg}</p>
+      <p className={`error-display ${resultMsg ? "show" : ""}`}>{resultMsg}</p>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { fetchUsers } from "../../../../Hooks/useFetch";
 import PageLoader from "../../../../Animations/PageLoader";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeaderGoBack from "../../../../Custom/HeaderGoBack";
 import ButtonLoad from "../../../../Animations/ButtonLoad";
 
@@ -13,6 +13,17 @@ const NewUsers = () => {
   const [approvedButtonStates, setApprovedButtonStates] = useState({});
   const [deleteButtonStates, setDeleteButtonStates] = useState({});
   const { data, isLoading, isError, refetch } = useQuery("users", fetchUsers);
+
+  useEffect(() => {
+    if (resultMsg) {
+      const timeoutId = setTimeout(() => {
+        setResultMsg(""); // Clear the message after 3 seconds
+      }, 3000);
+
+      // Cleanup function to clear the timeout when the component unmounts or resultMsg changes
+      return () => clearTimeout(timeoutId);
+    }
+  }, [resultMsg]);
 
   if (isError) {
     <div>Failed to fetch data</div>;
@@ -56,9 +67,12 @@ const NewUsers = () => {
     }));
 
     try {
-      await axios.delete(`${serVer}/deleteUser/${unapprovedUser._id}`);
+      const res = await axios.delete(
+        `${serVer}/deleteUser/${unapprovedUser._id}`
+      );
 
       refetch();
+      setResultMsg(res.data);
     } catch (error) {
       setResultMsg("Failed! Try again");
     } finally {
@@ -66,10 +80,6 @@ const NewUsers = () => {
         ...prevStates,
         [unapprovedUser._id]: "delete",
       }));
-
-      setTimeout(() => {
-        setResultMsg("");
-      }, 3000);
     }
   };
 
@@ -143,7 +153,7 @@ const NewUsers = () => {
           <div>No new users yet</div>
         )}
       </div>
-      <p className="results-display">{resultMsg}</p>
+      <p className={`error-display ${resultMsg ? "show" : ""}`}>{resultMsg}</p>
     </div>
   );
 };
