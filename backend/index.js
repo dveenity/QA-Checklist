@@ -293,6 +293,7 @@ app.post("/checklistFormUpdate", async (req, res) => {
       stage1,
       stage2,
       stage3,
+      stage4,
       qualityScore,
       checklistId,
     } = req.body;
@@ -314,6 +315,7 @@ app.post("/checklistFormUpdate", async (req, res) => {
             stage1,
             stage2,
             stage3,
+            stage4,
             score: qualityScore,
             date: new Date(),
           },
@@ -397,7 +399,8 @@ app.post("/updateEntry/:checklistId/:checklistItemId", async (req, res) => {
     const { checklistId, checklistItemId } = req.params;
 
     // Get updated data from request body
-    const { taskName, status, stage1, stage2, stage3, qualityScore } = req.body;
+    const { taskName, status, stage1, stage2, stage3, stage4, qualityScore } =
+      req.body;
 
     // Find the checklist by ID and update the corresponding checklist item
     const updatedChecklist = await Checklist.findOneAndUpdate(
@@ -409,6 +412,7 @@ app.post("/updateEntry/:checklistId/:checklistItemId", async (req, res) => {
           "checklistItems.$.stage1": stage1,
           "checklistItems.$.stage2": stage2,
           "checklistItems.$.stage3": stage3,
+          "checklistItems.$.stage4": stage4,
           "checklistItems.$.score": qualityScore,
         },
       },

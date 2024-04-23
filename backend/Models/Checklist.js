@@ -39,6 +39,9 @@ const checklistSchema = new mongoose.Schema(
         stage3: {
           type: String,
         },
+        stage4: {
+          type: String,
+        },
         score: {
           type: String,
         },

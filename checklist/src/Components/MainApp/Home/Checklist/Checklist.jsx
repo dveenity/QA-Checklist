@@ -112,7 +112,8 @@ const Checklist = () => {
 
     // function to update checklist entry
     const updateChecklistEntry = async (data) => {
-      const { taskName, status, stage1, stage2, stage3, qualityScore } = data;
+      const { taskName, status, stage1, stage2, stage3, stage4, qualityScore } =
+        data;
       try {
         setUpdateChecklistButton(<ButtonLoad />);
 
@@ -124,6 +125,7 @@ const Checklist = () => {
             stage1,
             stage2,
             stage3,
+            stage4,
             qualityScore,
           }
         );
@@ -205,7 +207,7 @@ const Checklist = () => {
                   {deleteButton}
                 </button>
               )}
-              {name === checklistItem.performedBy && (
+              {(name === checklistItem.performedBy || role === "admin") && (
                 <button onClick={() => toggleUpdateForm(checklistItem._id)}>
                   Update Checklist
                 </button>
@@ -249,8 +251,9 @@ const Checklist = () => {
                         required: "Stage 1 is required",
                       })}>
                       <option value="">Select Stage 1</option>
-                      <option value="pass">Pass</option>
-                      <option value="fail">Fail</option>
+                      <option value="Pass">Pass</option>
+                      <option value="Fail">Fail</option>
+                      <option value="Pending">Pending</option>
                     </select>
                     <p>{errors.stage1?.message}</p>
                   </div>
@@ -261,8 +264,9 @@ const Checklist = () => {
                         required: "Stage 2 is required",
                       })}>
                       <option value="">Select Stage 2</option>
-                      <option value="pass">Pass</option>
-                      <option value="fail">Fail</option>
+                      <option value="Pass">Pass</option>
+                      <option value="Fail">Fail</option>
+                      <option value="Pending">Pending</option>
                     </select>
                     <p>{errors.stage2?.message}</p>
                   </div>
@@ -273,10 +277,24 @@ const Checklist = () => {
                         required: "Stage 3 is required",
                       })}>
                       <option value="">Select Stage 3</option>
-                      <option value="pass">Pass</option>
-                      <option value="fail">Fail</option>
+                      <option value="Pass">Pass</option>
+                      <option value="Fail">Fail</option>
+                      <option value="Pending">Pending</option>
                     </select>
                     <p>{errors.stage3?.message}</p>
+                  </div>
+                  <div className="inputBox">
+                    <select
+                      id="stage4"
+                      {...register("stage4", {
+                        required: "Stage 4 is required",
+                      })}>
+                      <option value="">Select Stage 4</option>
+                      <option value="Pass">Pass</option>
+                      <option value="Fail">Fail</option>
+                      <option value="Pending">Pending</option>
+                    </select>
+                    <p>{errors.stage4?.message}</p>
                   </div>
                   <div className="inputBox">
                     <select
@@ -285,15 +303,9 @@ const Checklist = () => {
                         required: "Quality Score is required",
                       })}>
                       <option value="">Select Quality Score</option>
-                      <option value="10%">10%</option>
-                      <option value="20%">20%</option>
-                      <option value="30%">30%</option>
-                      <option value="40%">40%</option>
+                      <option value="25%">25%</option>
                       <option value="50%">50%</option>
-                      <option value="60%">60%</option>
-                      <option value="70%">70%</option>
-                      <option value="80%">80%</option>
-                      <option value="90%">90%</option>
+                      <option value="75%">75%</option>
                       <option value="100%">100%</option>
                     </select>
                     <p>{errors.qualityScore?.message}</p>
@@ -326,14 +338,24 @@ const Checklist = () => {
 
   // function to add user new checklist
   const onSubmit = async (data) => {
-    const { taskName, status, stage1, stage2, stage3, qualityScore } = data;
+    const { taskName, status, stage1, stage2, stage3, stage4, qualityScore } =
+      data;
     const token = localStorage.getItem("qc-users");
 
     try {
       setSend(<ButtonLoad />);
       const response = await axios.post(
         `${serVer}/checklistFormUpdate`,
-        { taskName, status, stage1, stage2, stage3, qualityScore, checklistId },
+        {
+          taskName,
+          status,
+          stage1,
+          stage2,
+          stage3,
+          stage4,
+          qualityScore,
+          checklistId,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -447,8 +469,9 @@ const Checklist = () => {
                 id="stage1"
                 {...register("stage1", { required: "Stage 1 is required" })}>
                 <option value="">Select Stage 1</option>
-                <option value="pass">Pass</option>
-                <option value="fail">Fail</option>
+                <option value="Pass">Pass</option>
+                <option value="Fail">Fail</option>
+                <option value="Pending">Pending</option>
               </select>
               <p>{errors.stage1?.message}</p>
             </div>
@@ -457,8 +480,9 @@ const Checklist = () => {
                 id="stage2"
                 {...register("stage2", { required: "Stage 2 is required" })}>
                 <option value="">Select Stage 2</option>
-                <option value="pass">Pass</option>
-                <option value="fail">Fail</option>
+                <option value="Pass">Pass</option>
+                <option value="Fail">Fail</option>
+                <option value="Pending">Pending</option>
               </select>
               <p>{errors.stage2?.message}</p>
             </div>
@@ -467,10 +491,22 @@ const Checklist = () => {
                 id="stage3"
                 {...register("stage3", { required: "Stage 3 is required" })}>
                 <option value="">Select Stage 3</option>
-                <option value="pass">Pass</option>
-                <option value="fail">Fail</option>
+                <option value="Pass">Pass</option>
+                <option value="Fail">Fail</option>
+                <option value="Pending">Pending</option>
               </select>
               <p>{errors.stage3?.message}</p>
+            </div>
+            <div className="inputBox">
+              <select
+                id="stage4"
+                {...register("stage4", { required: "Stage 3 is required" })}>
+                <option value="">Select Stage 4</option>
+                <option value="Pass">Pass</option>
+                <option value="Fail">Fail</option>
+                <option value="Pending">Pending</option>
+              </select>
+              <p>{errors.stage4?.message}</p>
             </div>
             <div className="inputBox">
               <select
@@ -479,15 +515,9 @@ const Checklist = () => {
                   required: "Quality Score is required",
                 })}>
                 <option value="">Select Quality Score</option>
-                <option value="10%">10%</option>
-                <option value="20%">20%</option>
-                <option value="30%">30%</option>
-                <option value="40%">40%</option>
+                <option value="25%">25%</option>
                 <option value="50%">50%</option>
-                <option value="60%">60%</option>
-                <option value="70%">70%</option>
-                <option value="80%">80%</option>
-                <option value="90%">90%</option>
+                <option value="75%">75%</option>
                 <option value="100%">100%</option>
               </select>
               <p>{errors.qualityScore?.message}</p>
