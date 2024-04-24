@@ -723,7 +723,7 @@ a {
 
       li {
         border-radius: 1.5rem;
-        background-color: rgb(219, 219, 219);
+        background: linear-gradient(to right, black 40%, rgb(0, 0, 160));
         font-family: var(--font-two);
         transition: 0.1s ease-in-out;
 
@@ -732,12 +732,12 @@ a {
         }
 
         a {
-          padding: 0.5rem;
+          padding: 0.7rem;
           font-size: clamp(0.9rem, 4vw, 1.3rem);
           display: flex;
           flex-flow: column;
           gap: 1rem;
-          color: black;
+          color: white;
 
           > h2 {
             font-weight: 300;
