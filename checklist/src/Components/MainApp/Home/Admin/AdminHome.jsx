@@ -3,7 +3,8 @@ import { useQuery } from "react-query";
 import { fetchUsers } from "../../../Hooks/useFetch";
 import PageLoader from "../../../Animations/PageLoader";
 import { FaRegNewspaper } from "react-icons/fa";
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import CreateChecklistAnim from "../../../Animations/CreateChecklistAnim";
+import ManageChecklistAnim from "../../../Animations/ManageChecklistAnim";
 
 const AdminHome = () => {
   const { data, isLoading, isError } = useQuery("users", fetchUsers);
@@ -54,7 +55,7 @@ const AdminHome = () => {
           <h4>{dash.name}</h4>
           <div>{dash.icon}</div>
         </div>
-        <div>count: {dash.count}</div>
+        <div>{dash.count}</div>
       </Link>
     </li>
   ));
@@ -67,14 +68,14 @@ const AdminHome = () => {
         <ul>
           <li>
             <Link to="/createChecklist">
-              <MdCheckBoxOutlineBlank />
-              Create New Checklist
+              <CreateChecklistAnim />
+              <div>Create New Checklist</div>
             </Link>
           </li>
           <li>
             <Link to="/manageChecklist">
-              <MdCheckBoxOutlineBlank />
-              Manage All Checklist
+              <ManageChecklistAnim />
+              <div>Manage All Checklist</div>
             </Link>
           </li>
         </ul>

@@ -4,6 +4,7 @@ import { MdCheckBoxOutlineBlank, MdChecklist } from "react-icons/md";
 import { useQuery } from "react-query";
 import { fetchChecklists, fetchUserEntry } from "../../../Hooks/useFetch";
 import PageLoader from "../../../Animations/PageLoader";
+import ManageChecklistAnim from "../../../Animations/ManageChecklistAnim";
 
 const Users = () => {
   const {
@@ -59,8 +60,8 @@ const Users = () => {
         <ul>
           <li>
             <Link to="/manageChecklist">
-              <MdCheckBoxOutlineBlank />
-              View All Checklists
+              <ManageChecklistAnim />
+              <div>View All Checklist</div>
             </Link>
           </li>
         </ul>

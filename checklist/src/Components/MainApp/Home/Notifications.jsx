@@ -4,6 +4,7 @@ import { fetchNotifications, fetchUser } from "../../Hooks/useFetch";
 import { Link } from "react-router-dom";
 import { IoAlarmOutline } from "react-icons/io5";
 import HeaderGoBack from "../../Custom/HeaderGoBack";
+import NotifNull from "../../Animations/NotifNull";
 
 const Notifications = () => {
   const {
@@ -70,7 +71,10 @@ const Notifications = () => {
             })}
           </ul>
         ) : (
-          <div>No notifications yet</div>
+          <div className="Null">
+            <div>No notifications yet</div>
+            <NotifNull />
+          </div>
         )}
       </div>
     </div>

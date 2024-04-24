@@ -50,18 +50,18 @@ body {
     a {
       padding: 0.5rem;
       font-size: clamp(1.3rem, 4vw, 1.7rem);
-      border-radius: 1.5rem;
+      border-radius: 1.5rem !important;
       color: white;
-      transition: 0.3s ease-in-out;
+      transition: 0.2s ease-in-out;
     }
   }
 
   .active {
-    border-radius: 1.5rem;
+    border-radius: 1.5rem !important;
     color: black;
     background-color: white;
     font-size: clamp(1.5rem, 5vw, 2rem);
-    transition: 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
 }
 /* STYLING GO BACK COMPONENT */
@@ -363,29 +363,40 @@ a {
 
 /* AUTHENTICATION ROUTE */
 .authentication {
-  height: 50vh;
-  background-color: black;
+  position: relative;
+  background-color: white;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
 
   .authentication-container {
-    border: 1px solid brown;
-    border-radius: 2rem;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80vw;
-    background-color: white;
-    box-shadow: 2px 2px 5px rgba(165, 42, 42, 0.6);
-    padding: 1rem;
     display: flex;
     flex-flow: column;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
+    z-index: 1;
 
-    h2 {
-      color: black;
-      font-size: clamp(2rem, 8vw, 2.5rem);
-      font-weight: 400;
+    > :nth-child(1) {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      gap: 1rem;
+
+      h2 {
+        font-size: clamp(3rem, 4vw, 3.5rem);
+        font-weight: 300;
+      }
+      h3 {
+        font-family: var(--font-two);
+        font-size: clamp(1rem, 2vw, 1.5rem);
+      }
     }
 
     form {
@@ -393,7 +404,7 @@ a {
       display: flex;
       flex-flow: column;
       align-items: center;
-      gap: 0.5rem;
+      gap: 1rem;
 
       .inputBox {
         display: flex;
@@ -403,13 +414,17 @@ a {
         position: relative;
 
         input {
-          width: 100%;
-          padding: 0.3rem;
-          border-radius: 0.5rem;
-          border: 2px solid rgb(171, 171, 255);
+          width: 80vw;
+          max-width: 400px;
+          padding: 0.5rem;
+          border-radius: 1.5rem;
+          border: 1px solid rgb(199, 199, 199);
+          box-shadow: 1px 3px 4px rgb(151, 151, 151);
+          background-color: white;
+          font-family: var(--font-two);
 
           &:focus {
-            border-color: blue;
+            border-color: rgb(33, 0, 85);
           }
         }
 
@@ -420,24 +435,38 @@ a {
         .toggle {
           position: absolute;
           right: 0.5rem;
-          top: 0.5rem;
+          top: 0.7rem;
+          color: rgb(109, 109, 109);
         }
       }
 
-      button {
-        width: 100%;
-        height: 3rem;
+      > :last-child {
         display: flex;
+        width: 100%;
+        justify-content: end;
+      }
+
+      button {
+        display: flex;
+        flex-flow: row;
+        gap: 1rem;
         justify-content: center;
         align-items: center;
-        background-color: blue;
+
         border-radius: 0.5rem;
-        color: white;
         font-size: clamp(1.5rem, 7vw, 2rem);
         transition: 0.2s ease-in-out;
 
         &:hover {
           transform: scale(1.05);
+        }
+
+        > :nth-child(2) {
+          background: linear-gradient(to right, red, blue);
+          color: white;
+          width: 4rem;
+          height: 2.5rem;
+          border-radius: 1rem;
         }
       }
     }
@@ -464,12 +493,38 @@ a {
     }
   }
 }
+.spacer {
+  aspect-ratio: 960 / 540;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+}
+.layer1 {
+  background-image: url("./assets/svg/wave-haikei.svg");
+}
+.spacer2 {
+  aspect-ratio: 960 / 540;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  bottom: 0;
+}
+.layer2 {
+  background-image: url("./assets/svg/blob-haikei.svg");
+}
 
 /* STYLING HOME ROUTE */
 .home {
   background-color: white;
   min-height: 100vh;
   min-height: 100svh;
+  display: flex;
+  flex-flow: column;
 
   .home-header {
     display: flex;
@@ -510,12 +565,14 @@ a {
     padding: 0.5rem;
     display: flex;
     flex-flow: column;
-    gap: 2rem;
+    align-items: center;
+    gap: 1rem;
 
     > :nth-child(1) {
       display: flex;
       flex-flow: column;
       gap: 0.1rem;
+      align-items: center;
 
       h1 {
         font-size: clamp(1.3rem, 4vw, 1.7rem);
@@ -529,40 +586,47 @@ a {
     }
 
     .admin-home {
+      width: 100%;
       display: flex;
       flex-flow: column;
       gap: 1.5rem;
 
       > :nth-child(1) {
         display: flex;
+        flex-flow: column;
         justify-content: center;
-        gap: 1rem;
+        gap: 1.2rem;
 
         li {
-          background-color: black;
-          width: 45%;
-          border-radius: 0.5rem;
+          background: linear-gradient(
+            70deg,
+            rgb(0, 0, 155),
+            rgb(100, 30, 42),
+            black
+          );
+          width: 100%;
+          border-radius: 2.5rem;
           box-shadow: 1px 4px 5px rgb(121, 121, 121);
           transition: 0.1s ease-in-out;
 
           &:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
           }
 
           a {
             height: 7rem;
             display: flex;
-            flex-flow: column;
             align-items: center;
             justify-content: space-between;
             color: white;
-            padding: 0.5rem;
+            padding: 1rem;
 
             > :nth-child(1) {
               display: flex;
               flex-flow: column;
               align-items: center;
               gap: 0.3rem;
+              font-weight: 300;
 
               h4 {
                 font-size: clamp(1.1rem, 4vw, 1.4rem);
@@ -574,8 +638,9 @@ a {
             }
 
             > :nth-child(2) {
-              font-size: 1rem;
+              font-size: 4em;
               color: rgb(216, 216, 255);
+              font-family: var(--font-two);
             }
           }
         }
@@ -587,18 +652,20 @@ a {
         gap: 0.5rem;
 
         h3 {
-          font-size: clamp(1.5rem, 5vw, 2rem);
+          font-size: clamp(1.2rem, 3vw, 1.5rem);
         }
 
         ul {
           display: flex;
-          flex-flow: column;
+          justify-content: center;
           gap: 1rem;
 
           li {
-            border: 1px solid rgb(0, 0, 100);
+            border: 1px solid rgb(160, 160, 160);
+            width: 45%;
             border-radius: 0.5rem;
             transition: 0.1s ease-in-out;
+            background: linear-gradient(to right, black, rgb(0, 0, 102));
 
             &:hover {
               transform: scale(1.02);
@@ -606,11 +673,26 @@ a {
 
             a {
               display: flex;
+              flex-flow: column;
               align-items: center;
               gap: 1rem;
-              font-size: clamp(1.5rem, 4vw, 2rem);
+
               padding: 0.3rem;
               color: black;
+              width: 100%;
+              height: 7rem;
+
+              > :nth-child(1) {
+                height: 4rem;
+                width: 4rem;
+                background-color: white;
+                border-radius: 50%;
+              }
+
+              > :nth-child(2) {
+                font-size: clamp(0.8rem, 2vw, 1.4rem);
+                color: white;
+              }
             }
           }
         }
@@ -670,6 +752,13 @@ a {
       }
     }
   }
+
+  .Null {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 2rem;
+  }
 }
 
 /* STYLING NEW USERS ROUTE */
@@ -689,16 +778,24 @@ a {
 
     ul {
       display: flex;
-      flex-flow: column;
+      flex-flow: row wrap;
       gap: 1rem;
 
       li {
-        background-color: var(--header-bg);
+        background: linear-gradient(
+          70deg,
+          rgb(0, 0, 112),
+          rgb(255, 33, 70),
+          rgb(126, 34, 0)
+        );
+        width: 70vw;
+        max-width: 20rem;
         border-radius: 1rem;
-        padding: 0.5rem;
+        padding: 1rem;
         display: flex;
         flex-flow: column;
-        gap: 0.4rem;
+        justify-content: space-between;
+        gap: 0.5rem;
         box-shadow: 1px 4px 5px black;
         transition: 0.1s ease-in-out;
 
@@ -706,18 +803,29 @@ a {
           transform: scale(1.02);
         }
 
+        .users-anim {
+          width: 3rem;
+          background-color: white;
+          border-radius: 50%;
+          height: 5rem;
+          width: 5rem;
+        }
+
         h4 {
-          font-weight: 200;
+          font-weight: 500;
+          font-family: var(--font-two);
           font-size: clamp(1rem, 4vw, 1.4rem);
           display: flex;
           gap: 0.5rem;
+          color: white;
 
           span {
-            font-weight: 600;
+            font-weight: 200;
           }
         }
 
         input {
+          font-family: var(--font-two);
           border-radius: 0.5rem;
           border: 1px solid black;
           padding: 0.2rem;
@@ -750,6 +858,13 @@ a {
         }
       }
     }
+  }
+
+  .Null {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 2rem;
   }
 }
 
@@ -857,7 +972,7 @@ a {
 
       li {
         width: 100%;
-        background-color: rgb(0, 0, 0);
+        background: linear-gradient(to right, rgb(0, 0, 126), black);
         border-radius: 3rem;
         transition: 0.1s ease-in-out;
 
@@ -894,7 +1009,7 @@ a {
 
           > :last-child {
             height: 7rem;
-            width: 8rem;
+            width: 7rem;
           }
         }
       }
@@ -966,19 +1081,24 @@ a {
     border-radius: 0.5rem;
     width: 95%;
     height: 60vh;
+    overflow-y: scroll;
     min-height: 200px;
     display: flex;
     flex-flow: column;
-    gap: 0.5rem;
+    gap: 0.3rem;
 
     /* checklist heading and title */
     > :nth-child(1) {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.3rem 2rem 0 0.3rem;
       background-color: black;
       color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1;
 
       li {
         border-bottom: 2px solid black;

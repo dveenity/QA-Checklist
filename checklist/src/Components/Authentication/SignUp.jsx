@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa6";
 
 const serVer = `https://checklist-app-backend.vercel.app`;
 const SignUp = () => {
@@ -19,7 +20,7 @@ const SignUp = () => {
   const { register, handleSubmit, formState } = form;
   const { errors, isSubmitting } = formState;
 
-  const [send, setSend] = useState("Sign Up");
+  const [send, setSend] = useState(<FaArrowRight />);
   // State to store and display result data
   const [resultMessage, setResultMessage] = useState("");
   const [isLoading, setIsLoading] = useState(null);
@@ -100,8 +101,12 @@ const SignUp = () => {
 
   return (
     <div className="authentication">
+      <div className="spacer layer1"></div>
       <div className="authentication-container">
-        <h2>Sign Up</h2>
+        <div>
+          <h2>Hello</h2>
+          <h3>Create a new account by signing up</h3>
+        </div>
         <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
           <div className="inputBox">
             <input
@@ -144,10 +149,12 @@ const SignUp = () => {
             </div>
             <p>{errors.password?.message}</p>
           </div>
-
-          <button type="submit" disabled={isSubmitting || isLoading}>
-            {send}
-          </button>
+          <div>
+            <button type="submit" disabled={isSubmitting || isLoading}>
+              <div>Sign up</div>
+              {send}
+            </button>
+          </div>
         </form>
         <p className="result">{resultMessage}</p>
         <div className="sign-log">
@@ -155,6 +162,7 @@ const SignUp = () => {
           <Link to="/login">Login</Link>
         </div>
       </div>
+      <div className="spacer2 layer2"></div>
     </div>
   );
 };

@@ -197,6 +197,10 @@ const Checklist = () => {
                 <span>{checklistItem.stage3}</span>
               </li>
               <li>
+                <span>Stage 4:</span>
+                <span>{checklistItem.stage4}</span>
+              </li>
+              <li>
                 <span>Quality Score:</span>
                 <span>{checklistItem.score}</span>
               </li>
@@ -459,8 +463,8 @@ const Checklist = () => {
                 {...register("status", { required: "Status is required" })}>
                 <option value="">Select Status</option>
                 <option value="pending">Pending</option>
-                <option value="completed">Completed</option>
                 <option value="in progress">In Progress</option>
+                <option value="completed">Completed</option>
               </select>
               <p>{errors.status?.message}</p>
             </div>

@@ -10,6 +10,7 @@ import axios from "axios";
 
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import ButtonLoad from "../Animations/ButtonLoad";
+import { FaArrowRight } from "react-icons/fa6";
 
 const serVer = `https://checklist-app-backend.vercel.app`;
 
@@ -19,7 +20,7 @@ const Login = () => {
   const { register, handleSubmit, formState } = form;
   const { errors, isSubmitting } = formState;
 
-  const [send, setSend] = useState("Log In");
+  const [send, setSend] = useState(<FaArrowRight />);
   // State to store and display result data
   const [resultMessage, setResultMessage] = useState("");
   const [isLoading, setIsLoading] = useState(null);
@@ -96,8 +97,12 @@ const Login = () => {
 
   return (
     <div className="authentication">
+      <div className="spacer layer1"></div>
       <div className="authentication-container">
-        <h2>Log In</h2>
+        <div>
+          <h2>Hello</h2>
+          <h3>Log in to your account</h3>
+        </div>
         <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
           <div className="inputBox">
             <input
@@ -129,10 +134,12 @@ const Login = () => {
             </div>
             <p>{errors.password?.message}</p>
           </div>
-
-          <button type="submit" disabled={isSubmitting || isLoading}>
-            {send}
-          </button>
+          <div>
+            <button type="submit" disabled={isSubmitting || isLoading}>
+              <div>Log in</div>
+              {send}
+            </button>
+          </div>
         </form>
         <p className="result">{resultMessage}</p>
         <div className="sign-log">
@@ -140,6 +147,7 @@ const Login = () => {
           <Link to="/signup">Sign Up</Link>
         </div>
       </div>
+      <div className="spacer2 layer2"></div>
     </div>
   );
 };

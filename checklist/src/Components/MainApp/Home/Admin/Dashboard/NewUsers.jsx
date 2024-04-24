@@ -5,6 +5,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import HeaderGoBack from "../../../../Custom/HeaderGoBack";
 import ButtonLoad from "../../../../Animations/ButtonLoad";
+import NewUsersAnim from "../../../../Animations/NewUsersAnim";
+import Null from "../../../../Animations/Null";
 
 const serVer = `https://checklist-app-backend.vercel.app`;
 const NewUsers = () => {
@@ -97,6 +99,7 @@ const NewUsers = () => {
           <ul>
             {unapprovedUsers.map((unapprovedUser) => (
               <li key={unapprovedUser._id}>
+                <NewUsersAnim />
                 <div>
                   <h4>
                     Name: <span>{unapprovedUser.name}</span>
@@ -150,7 +153,10 @@ const NewUsers = () => {
             ))}
           </ul>
         ) : (
-          <div>No new users yet</div>
+          <div className="Null">
+            <div>No new users yet</div>
+            <Null />
+          </div>
         )}
       </div>
       <p className={`error-display ${resultMsg ? "show" : ""}`}>{resultMsg}</p>
