@@ -1212,9 +1212,8 @@ a {
           display: flex;
           gap: 10vw;
 
-          * {
+          > * {
             height: 2.5rem;
-            width: 9rem;
             border-radius: 1rem;
             padding: 0.3rem;
             color: white;
@@ -1486,6 +1485,13 @@ textarea {
   height: 10vh !important;
   padding: 0.5rem !important;
   resize: none;
+}
+
+input,
+textarea,
+select,
+option {
+  font-family: var(--font-two);
 }
 
 button:hover {

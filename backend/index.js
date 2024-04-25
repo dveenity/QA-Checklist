@@ -398,8 +398,19 @@ app.post("/updateEntry/:checklistId/:checklistItemId", async (req, res) => {
     const { checklistId, checklistItemId } = req.params;
 
     // Get updated data from request body
-    const { taskName, status, stage1, stage2, stage3, stage4, qualityScore } =
-      req.body;
+    const { taskName, status, stage1, stage2, stage3, stage4 } = req.body;
+
+    // Calculate quality score based on the number of "Pass" stages
+    const passStages = [stage1, stage2, stage3, stage4].filter(
+      (stage) => stage === "Pass"
+    ).length;
+    const qualityScore = passStages * 25;
+
+    // Set other stages to "Pending" when blank
+    const updatedStage1 = stage1 || "Pending";
+    const updatedStage2 = stage2 || "Pending";
+    const updatedStage3 = stage3 || "Pending";
+    const updatedStage4 = stage4 || "Pending";
 
     // Find the checklist by ID and update the corresponding checklist item
     const updatedChecklist = await Checklist.findOneAndUpdate(
@@ -408,10 +419,10 @@ app.post("/updateEntry/:checklistId/:checklistItemId", async (req, res) => {
         $set: {
           "checklistItems.$.taskName": taskName,
           "checklistItems.$.status": status,
-          "checklistItems.$.stage1": stage1,
-          "checklistItems.$.stage2": stage2,
-          "checklistItems.$.stage3": stage3,
-          "checklistItems.$.stage4": stage4,
+          "checklistItems.$.stage1": updatedStage1,
+          "checklistItems.$.stage2": updatedStage2,
+          "checklistItems.$.stage3": updatedStage3,
+          "checklistItems.$.stage4": updatedStage4,
           "checklistItems.$.score": qualityScore,
         },
       },

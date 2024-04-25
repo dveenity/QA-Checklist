@@ -35,7 +35,7 @@ const AdminHome = () => {
   // create an admin dashboard array and map into dom
   const dashboard = [
     {
-      name: "New Staffs",
+      name: "New Staff",
       icon: <FaRegNewspaper />,
       link: "/newUsers",
       count: unapprovedUsersLength,

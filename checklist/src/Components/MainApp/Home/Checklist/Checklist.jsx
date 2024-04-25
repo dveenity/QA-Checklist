@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageLoader from "../../../Animations/PageLoader";
 import { fetchUser } from "../../../Hooks/useFetch";
 import { IoIosArrowDown, IoIosArrowUp, IoIosCreate } from "react-icons/io";
@@ -34,6 +34,17 @@ const Checklist = () => {
   const [send, setSend] = useState("Submit");
   // State to store and display result data
   const [resultMessage, setResultMessage] = useState("");
+
+  useEffect(() => {
+    if (resultMessage) {
+      const timeoutId = setTimeout(() => {
+        setResultMessage(""); // Clear the message after 3 seconds
+      }, 3000);
+
+      // Cleanup function to clear the timeout when the component unmounts or resultMsg changes
+      return () => clearTimeout(timeoutId);
+    }
+  }, [resultMessage]);
 
   // react form
   const form = useForm();
@@ -112,8 +123,7 @@ const Checklist = () => {
 
     // function to update checklist entry
     const updateChecklistEntry = async (data) => {
-      const { taskName, status, stage1, stage2, stage3, stage4, qualityScore } =
-        data;
+      const { taskName, status, stage1, stage2, stage3, stage4 } = data;
       try {
         setUpdateChecklistButton(<ButtonLoad />);
 
@@ -126,7 +136,6 @@ const Checklist = () => {
             stage2,
             stage3,
             stage4,
-            qualityScore,
           }
         );
 
@@ -202,7 +211,7 @@ const Checklist = () => {
               </li>
               <li>
                 <span>Quality Score:</span>
-                <span>{checklistItem.score}</span>
+                <span>{checklistItem.score}%</span>
               </li>
             </ul>
             <div>
@@ -242,7 +251,7 @@ const Checklist = () => {
                         required: "Status is required",
                       })}>
                       <option value="">Select Status</option>
-                      <option value="pending">Pending</option>
+
                       <option value="completed">Completed</option>
                       <option value="in progress">In Progress</option>
                     </select>
@@ -257,62 +266,29 @@ const Checklist = () => {
                       <option value="">Select Stage 1</option>
                       <option value="Pass">Pass</option>
                       <option value="Fail">Fail</option>
-                      <option value="Pending">Pending</option>
                     </select>
                     <p>{errors.stage1?.message}</p>
                   </div>
                   <div className="inputBox">
-                    <select
-                      id="stage2"
-                      {...register("stage2", {
-                        required: "Stage 2 is required",
-                      })}>
+                    <select id="stage2" {...register("stage2")}>
                       <option value="">Select Stage 2</option>
                       <option value="Pass">Pass</option>
                       <option value="Fail">Fail</option>
-                      <option value="Pending">Pending</option>
                     </select>
-                    <p>{errors.stage2?.message}</p>
                   </div>
                   <div className="inputBox">
-                    <select
-                      id="stage3"
-                      {...register("stage3", {
-                        required: "Stage 3 is required",
-                      })}>
+                    <select id="stage3" {...register("stage3")}>
                       <option value="">Select Stage 3</option>
                       <option value="Pass">Pass</option>
                       <option value="Fail">Fail</option>
-                      <option value="Pending">Pending</option>
                     </select>
-                    <p>{errors.stage3?.message}</p>
                   </div>
                   <div className="inputBox">
-                    <select
-                      id="stage4"
-                      {...register("stage4", {
-                        required: "Stage 4 is required",
-                      })}>
+                    <select id="stage4" {...register("stage4")}>
                       <option value="">Select Stage 4</option>
                       <option value="Pass">Pass</option>
                       <option value="Fail">Fail</option>
-                      <option value="Pending">Pending</option>
                     </select>
-                    <p>{errors.stage4?.message}</p>
-                  </div>
-                  <div className="inputBox">
-                    <select
-                      id="qualityScore"
-                      {...register("qualityScore", {
-                        required: "Quality Score is required",
-                      })}>
-                      <option value="">Select Quality Score</option>
-                      <option value="25%">25%</option>
-                      <option value="50%">50%</option>
-                      <option value="75%">75%</option>
-                      <option value="100%">100%</option>
-                    </select>
-                    <p>{errors.qualityScore?.message}</p>
                   </div>
                   <div>
                     <button type="submit" disabled={isSubmitting || isLoading}>
@@ -373,7 +349,7 @@ const Checklist = () => {
 
       // close the form
       setChecklistDetails(null);
-      console.log(response);
+      setResultMessage(response.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -382,7 +358,8 @@ const Checklist = () => {
   };
 
   // handle form error
-  const onError = () => {
+  const onError = (error) => {
+    console.error(error);
     setResultMessage("Failed to submit, check inputs and try again");
 
     // Hide the message after 2 seconds
@@ -462,7 +439,7 @@ const Checklist = () => {
                 id="status"
                 {...register("status", { required: "Status is required" })}>
                 <option value="">Select Status</option>
-                <option value="pending">Pending</option>
+
                 <option value="in progress">In Progress</option>
                 <option value="completed">Completed</option>
               </select>
@@ -475,7 +452,6 @@ const Checklist = () => {
                 <option value="">Select Stage 1</option>
                 <option value="Pass">Pass</option>
                 <option value="Fail">Fail</option>
-                <option value="Pending">Pending</option>
               </select>
               <p>{errors.stage1?.message}</p>
             </div>
@@ -484,7 +460,6 @@ const Checklist = () => {
                 <option value="">Select Stage 2</option>
                 <option value="Pass">Pass</option>
                 <option value="Fail">Fail</option>
-                <option value="Pending">Pending</option>
               </select>
             </div>
             <div className="inputBox">
@@ -492,7 +467,6 @@ const Checklist = () => {
                 <option value="">Select Stage 3</option>
                 <option value="Pass">Pass</option>
                 <option value="Fail">Fail</option>
-                <option value="Pending">Pending</option>
               </select>
             </div>
             <div className="inputBox">
@@ -500,9 +474,7 @@ const Checklist = () => {
                 <option value="">Select Stage 4</option>
                 <option value="Pass">Pass</option>
                 <option value="Fail">Fail</option>
-                <option value="Pending">Pending</option>
               </select>
-              <p>{errors.stage4?.message}</p>
             </div>
             <div>
               <button type="submit" disabled={isSubmitting || isLoading}>
@@ -511,7 +483,9 @@ const Checklist = () => {
               <button onClick={toggleChecklistDetails}>Close</button>
             </div>
           </form>
-          <p className="results-display">{resultMessage}</p>
+          <p className={`error-display ${resultMessage ? "show" : ""}`}>
+            {resultMessage}
+          </p>
         </div>
       )}
     </div>
