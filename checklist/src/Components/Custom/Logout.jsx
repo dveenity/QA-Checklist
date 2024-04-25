@@ -14,7 +14,7 @@ const Logout = () => {
 
   return (
     <div className="log-out" onClick={logOut}>
-      Log Out
+      <div>Log Out</div>
       <FaArrowRight />
     </div>
   );

@@ -42,6 +42,7 @@ const Profile = () => {
 
   return (
     <div className="profile">
+      <div className="spacer layer1"></div>
       <div>
         <div>
           <h1>{name}</h1>
@@ -65,9 +66,8 @@ const Profile = () => {
       <ul>
         <li>Email: {email}</li>
       </ul>
-      <div>
-        <Logout />
-      </div>
+      <Logout />
+      <div className="spacer2 layer2"></div>
     </div>
   );
 };

@@ -76,7 +76,7 @@ const Login = () => {
       }, 5000);
     } finally {
       setIsLoading(false);
-      setSend("Log In");
+      setSend(<FaArrowRight />);
     }
   };
 

@@ -26,7 +26,11 @@ const Home = () => {
   useEffect(() => {
     if (data && !data.approved) {
       // logout if account not approved or not data found
-      return logout();
+      return (
+        <div className="fetch-error">
+          Account not approved yet! <Logout /> and check again
+        </div>
+      );
     }
   }, [data, logout]);
 
@@ -64,6 +68,7 @@ const Home = () => {
 
   return (
     <div className="home">
+      <div className="spacer layer1"></div>
       <div className="home-header">
         <VscChecklist />
         <Link to="/notifications">
@@ -79,6 +84,7 @@ const Home = () => {
         {role === "user" && <UserHome />}
         {role === "admin" && <AdminHome />}
       </div>
+      <div className="spacer2 layer2"></div>
     </div>
   );
 };

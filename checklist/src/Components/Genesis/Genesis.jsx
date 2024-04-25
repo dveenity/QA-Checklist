@@ -9,6 +9,7 @@ import {
   MdAssessment,
 } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
+import Marquee from "react-fast-marquee";
 
 const Genesis = () => {
   const companyName = "Hedged";
@@ -77,6 +78,7 @@ const Genesis = () => {
 
   return (
     <div className="genesis">
+      <div className="spacer layer1"></div>
       <div>
         <h1>
           Welcome to <span>{companyName} Inc</span> <br />
@@ -95,8 +97,11 @@ const Genesis = () => {
       </div>
       <div>
         <h3>Walkthrough</h3>
-        <ul>{featuresOutput}</ul>
+        <Marquee className="marquee">
+          <ul>{featuresOutput}</ul>
+        </Marquee>
       </div>
+      <div className="spacer2 layer2"></div>
     </div>
   );
 };

@@ -80,7 +80,7 @@ const SignUp = () => {
       }, 5000);
     } finally {
       setIsLoading(false);
-      setSend("Sign Up");
+      setSend(<FaArrowRight />);
     }
   };
 

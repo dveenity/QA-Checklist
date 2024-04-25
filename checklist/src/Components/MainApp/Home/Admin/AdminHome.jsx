@@ -41,7 +41,7 @@ const AdminHome = () => {
       count: unapprovedUsersLength,
     },
     {
-      name: "Approved Staffs",
+      name: "Approved",
       icon: <FaRegNewspaper />,
       link: "/approved",
       count: approvedUsersLength,

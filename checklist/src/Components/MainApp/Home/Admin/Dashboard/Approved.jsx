@@ -165,6 +165,7 @@ const Approved = () => {
         )}
       </div>
       <p className={`error-display ${resultMsg ? "show" : ""}`}>{resultMsg}</p>
+      <div className="spacer2 layer2"></div>
     </div>
   );
 };
