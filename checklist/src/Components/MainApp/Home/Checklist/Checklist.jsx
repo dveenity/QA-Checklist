@@ -29,7 +29,6 @@ const Checklist = () => {
   const [deleteChecklistButton, setDeleteChecklistButton] =
     useState("Delete Checklist");
   const [updateChecklistButton, setUpdateChecklistButton] = useState("Submit");
-  const [checklistEntryMessage, setChecklistEntryMessage] = useState(null);
   const [checklistItemId, setChecklistItemId] = useState(null);
   const [send, setSend] = useState("Submit");
   // State to store and display result data
@@ -148,9 +147,9 @@ const Checklist = () => {
         // close opened form
         setExpandedForm(null);
 
-        console.log(response);
+        setResultMessage(response.data);
       } catch (error) {
-        console.error(error);
+        setResultMessage(error.response.data);
       } finally {
         setUpdateChecklistButton("Submit");
       }
@@ -159,12 +158,7 @@ const Checklist = () => {
     // on error
     // handle form error
     const onError = () => {
-      setChecklistEntryMessage("Failed to submit, check inputs and try again");
-
-      // Hide the message after 2 seconds
-      setTimeout(() => {
-        setChecklistEntryMessage("");
-      }, 2000);
+      setResultMessage("Failed to submit, check inputs and try again");
     };
 
     // convert date
@@ -297,7 +291,6 @@ const Checklist = () => {
                     <button onClick={toggleUpdateForm}>Close</button>
                   </div>
                 </form>
-                <p className="results-display">{checklistEntryMessage}</p>
               </div>
             )}
           </div>
@@ -358,8 +351,7 @@ const Checklist = () => {
   };
 
   // handle form error
-  const onError = (error) => {
-    console.error(error);
+  const onError = () => {
     setResultMessage("Failed to submit, check inputs and try again");
 
     // Hide the message after 2 seconds
@@ -483,11 +475,11 @@ const Checklist = () => {
               <button onClick={toggleChecklistDetails}>Close</button>
             </div>
           </form>
-          <p className={`error-display ${resultMessage ? "show" : ""}`}>
-            {resultMessage}
-          </p>
         </div>
       )}
+      <p className={`error-display ${resultMessage ? "show" : ""}`}>
+        {resultMessage}
+      </p>
     </div>
   );
 };
