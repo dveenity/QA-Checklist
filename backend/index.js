@@ -287,16 +287,15 @@ app.post("/checklistFormUpdate", async (req, res) => {
     const userId = req.userId;
 
     // receive objects from frontend
-    const {
-      taskName,
-      status,
-      stage1,
-      stage2,
-      stage3,
-      stage4,
-      qualityScore,
-      checklistId,
-    } = req.body;
+    const { taskName, status, stage1, stage2, stage3, stage4, checklistId } =
+      req.body;
+
+    // Calculate quality score based on the stages
+    const countPass = [stage1, stage2, stage3, stage4].filter(
+      (stage) => stage === "Pass"
+    ).length;
+    const totalStages = 4;
+    const qualityScore = (countPass / totalStages) * 100;
 
     // find user
     const user = await User.findById(userId);
@@ -312,10 +311,10 @@ app.post("/checklistFormUpdate", async (req, res) => {
             taskName,
             performedBy,
             status,
-            stage1,
-            stage2,
-            stage3,
-            stage4,
+            stage1: stage1 || "pending",
+            stage2: stage2 || "pending",
+            stage3: stage3 || "pending",
+            stage4: stage4 || "pending",
             score: qualityScore,
             date: new Date(),
           },
