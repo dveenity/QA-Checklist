@@ -847,7 +847,7 @@ a {
         h4 {
           font-weight: 500;
           font-family: var(--font-two);
-          font-size: clamp(1rem, 4vw, 1.4rem);
+          font-size: clamp(1rem, 2.5vw, 1.3rem);
           display: flex;
           gap: 0.5rem;
           color: white;
@@ -1027,7 +1027,7 @@ a {
             width: 70%;
 
             h3 {
-              font-size: clamp(1.4rem, 4vw, 2rem);
+              font-size: clamp(1.2rem, 3vw, 1.6rem);
               display: flex;
             }
 
