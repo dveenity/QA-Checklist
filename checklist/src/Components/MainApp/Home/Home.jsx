@@ -82,7 +82,7 @@ const Home = () => {
           <h2>{position}</h2>
         </div>
         {role === "user" && <UserHome />}
-        {role === "admin" && <AdminHome />}
+        {role === "admin" && <AdminHome adminProps={[role, position]} />}
       </div>
       <div className="spacer2 layer2"></div>
     </div>

@@ -5,8 +5,12 @@ import PageLoader from "../../../Animations/PageLoader";
 import { FaRegNewspaper } from "react-icons/fa";
 import CreateChecklistAnim from "../../../Animations/CreateChecklistAnim";
 import ManageChecklistAnim from "../../../Animations/ManageChecklistAnim";
+import PropTypes from "prop-types";
 
-const AdminHome = () => {
+const AdminHome = ({ adminProps }) => {
+  const role = adminProps[0];
+  const position = adminProps[1];
+
   const { data, isLoading, isError } = useQuery("users", fetchUsers);
 
   if (isError) {
@@ -48,17 +52,34 @@ const AdminHome = () => {
     },
   ];
 
-  const dashboardOutput = dashboard.map((dash, i) => (
-    <li key={i}>
-      <Link to={dash.link}>
-        <div>
-          <h4>{dash.name}</h4>
-          <div>{dash.icon}</div>
+  const dashboardOutput = dashboard.map(
+    (dash, index) =>
+      role === "admin" && (
+        <div key={index}>
+          {position === "Administrator" ? (
+            <li>
+              <Link to={dash.link}>
+                <div>
+                  <h4>{dash.name}</h4>
+                  <div>{dash.icon}</div>
+                </div>
+                <div>{dash.count}</div>
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link>
+                <div>
+                  <h4>{dash.name}</h4>
+                  <div>{dash.icon}</div>
+                </div>
+                <div>{dash.count}</div>
+              </Link>
+            </li>
+          )}
         </div>
-        <div>{dash.count}</div>
-      </Link>
-    </li>
-  ));
+      )
+  );
 
   return (
     <div className="admin-home">
@@ -82,6 +103,10 @@ const AdminHome = () => {
       </div>
     </div>
   );
+};
+
+AdminHome.propTypes = {
+  adminProps: PropTypes.array.isRequired,
 };
 
 export default AdminHome;

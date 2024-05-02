@@ -144,10 +144,15 @@ app.put("/approve/:approvedUserId", async (req, res) => {
       return res.status(400).json({ error: "Position is required" });
     }
 
+    let role = "user";
+    if (position.toLowerCase() === "project manager") {
+      role = "admin";
+    }
+
     // find user by id and update user position
     await User.findByIdAndUpdate(
       userId,
-      { position, approved: true },
+      { position, approved: true, role },
       { new: true }
     );
 

@@ -20,6 +20,9 @@ const Checklist = () => {
   // navigation
   const navigate = useNavigate();
 
+  // State to track if the device width is above 700px
+  const [isDesktop, setIsDesktop] = useState(false);
+
   // store data in states
   const [description, setDescription] = useState(null);
   const [checklistDetails, setChecklistDetails] = useState(null);
@@ -33,6 +36,29 @@ const Checklist = () => {
   const [send, setSend] = useState("Submit");
   // State to store and display result data
   const [resultMessage, setResultMessage] = useState("");
+
+  // Function to check if the device width is above 700px
+  const checkIfDesktop = () => {
+    return window.innerWidth >= 700;
+  };
+
+  // Effect to update the isDesktop state when the component mounts and on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(checkIfDesktop());
+    };
+
+    // Check on component mount
+    setIsDesktop(checkIfDesktop());
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (resultMessage) {
@@ -171,6 +197,15 @@ const Checklist = () => {
           <li>{checklistItem.taskName}</li>
           <li>{checklistItem.performedBy}</li>
           <li>{checklistItem.status}</li>
+          {isDesktop && (
+            <>
+              <li>{checklistItem.stage1}</li>
+              <li>{checklistItem.stage2}</li>
+              <li>{checklistItem.stage3}</li>
+              <li>{checklistItem.stage4}</li>
+              <li>{checklistItem.score}%</li>
+            </>
+          )}
           <button
             onClick={() => {
               toggleChecklistInfo(checklistItem._id);
@@ -186,29 +221,31 @@ const Checklist = () => {
         {/* DISPLAY CHECKLIST INFO ON BUTTON CLICK */}
         {expandedIndex === checklistItem._id && (
           <div className="checklist-sub-more">
-            <ul>
-              <li>
-                <span>Stage 1:</span>
-                <span>{checklistItem.stage1}</span>
-              </li>
-              <li>
-                <span>Stage 2:</span>
-                <span>{checklistItem.stage2}</span>
-              </li>
-              <li>
-                <span>Stage 3:</span>
-                <span>{checklistItem.stage3}</span>
-              </li>
-              <li>
-                <span>Stage 4:</span>
-                <span>{checklistItem.stage4}</span>
-              </li>
-              <li>
-                <span>Quality Score:</span>
-                <span>{checklistItem.score}%</span>
-              </li>
-            </ul>
-            <div>
+            {!isDesktop && (
+              <ul>
+                <li>
+                  <span>Stage 1:</span>
+                  <span>{checklistItem.stage1}</span>
+                </li>
+                <li>
+                  <span>Stage 2:</span>
+                  <span>{checklistItem.stage2}</span>
+                </li>
+                <li>
+                  <span>Stage 3:</span>
+                  <span>{checklistItem.stage3}</span>
+                </li>
+                <li>
+                  <span>Stage 4:</span>
+                  <span>{checklistItem.stage4}</span>
+                </li>
+                <li>
+                  <span>Quality Score:</span>
+                  <span>{checklistItem.score}%</span>
+                </li>
+              </ul>
+            )}
+            <div className="sub-action-btn">
               {role === "admin" && (
                 <button onClick={() => deleteChecklistEntry(checklistItem._id)}>
                   {deleteButton}
@@ -403,6 +440,15 @@ const Checklist = () => {
           <li>Task</li>
           <li>Performed By</li>
           <li>Status</li>
+          {isDesktop && (
+            <>
+              <li>Stage 1</li>
+              <li>Stage 2</li>
+              <li>Stage 3</li>
+              <li>Stage 4</li>
+              <li>Quality Score</li>
+            </>
+          )}
         </ul>
         {checklistItemsOutput}
       </div>
