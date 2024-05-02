@@ -26,11 +26,7 @@ const Home = () => {
   useEffect(() => {
     if (data && !data.approved) {
       // logout if account not approved or not data found
-      return (
-        <div className="fetch-error">
-          Account not approved yet! <Logout /> and check again
-        </div>
-      );
+      return logout();
     }
   }, [data, logout]);
 
