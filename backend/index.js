@@ -42,7 +42,7 @@ app.post("/register", async (req, res) => {
 
   try {
     // Register a new user
-    const user = await User.signup(name, email, password, role, approved);
+    const user = await User.signup(name, email, password, approved);
 
     // Create a token for the user
     const token = createToken(user._id);
