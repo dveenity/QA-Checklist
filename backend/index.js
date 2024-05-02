@@ -41,17 +41,6 @@ app.post("/register", async (req, res) => {
   const { name, password, email } = req.body;
 
   try {
-    // check if any user exists
-    const userCount = await User.countDocuments();
-
-    // assign role to new user
-    let role = "user";
-    let approved = false;
-    if (userCount === 0) {
-      role = "admin";
-      approved = true;
-    }
-
     // Register a new user
     const user = await User.signup(name, email, password, role, approved);
 

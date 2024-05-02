@@ -31,7 +31,7 @@ const UsersSchema = new Schema(
     },
     position: {
       type: String,
-      default: "Project Manager",
+      default: "empty",
     },
   },
   { timestamps: true }
