@@ -32,7 +32,7 @@ const AdminHome = ({ adminProps }) => {
 
   // Filter approved users
   const approvedUsers = data.filter(
-    (user) => user.approved && user.role !== "admin"
+    (user) => user.approved && user.position !== "Administrator"
   );
   const approvedUsersLength = approvedUsers.length;
 
