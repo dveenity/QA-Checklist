@@ -172,6 +172,7 @@ button {
   align-items: center;
   justify-content: center;
   outline: none;
+  cursor: pointer;
 }
 input {
   outline: none;
@@ -584,12 +585,13 @@ a {
   }
 
   .home-body {
-    position: inherit;
+    position: relative;
     padding: 0.5rem;
     display: flex;
     flex-flow: column;
     align-items: center;
     gap: 1rem;
+    z-index: 1;
 
     > :nth-child(1) {
       display: flex;
@@ -1021,9 +1023,11 @@ a {
             flex-flow: column;
             gap: 0.2rem;
             color: var(--header-bg);
+            width: 70%;
 
             h3 {
               font-size: clamp(1.4rem, 4vw, 2rem);
+              display: flex;
             }
 
             > :last-child {
@@ -1243,7 +1247,7 @@ a {
     > * {
       height: 2.5rem;
       width: 9rem;
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-size: 1.2rem;
       color: white;
       border-radius: 1rem;
       transition: 0.2s ease-in-out;
