@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const validator = require("validator");
+
 const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
@@ -50,6 +52,8 @@ UsersSchema.statics.signup = async function (
     throw Error("All Fields must be filled");
   } else if (password.length < 3) {
     throw Error("password too short");
+  } else if (!validator.isEmail(email)) {
+    throw Error("Not a valid Email");
   }
 
   const exists = await this.findOne({ email });
