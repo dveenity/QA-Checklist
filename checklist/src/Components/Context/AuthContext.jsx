@@ -11,6 +11,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
+    loading: true, // added loading state
   });
 
   useEffect(() => {
@@ -18,13 +19,16 @@ export const AuthContextProvider = ({ children }) => {
 
     if (user) {
       dispatch({ type: "LOGIN", payload: user });
+    } else {
+      dispatch({ type: "LOGOUT" }); // added this line
     }
   }, []);
 
   // console.log("AuthContext state: ", state);
 
   return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
+    <AuthContext.Provider
+      value={{ ...state, dispatch, isLoading: state.loading }}>
       {children}
     </AuthContext.Provider>
   );

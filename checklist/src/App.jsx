@@ -31,8 +31,12 @@ const NotificationsLazy = lazy(() =>
 const showNavigationRoutes = ["/home", "/profile", "/manageChecklist"];
 
 function App() {
-  const { user } = useAuthContext();
   const location = useLocation();
+  const { user, isLoading } = useAuthContext();
+
+  if (isLoading) {
+    return <PageLoader />;
+  }
 
   const showNavigation =
     showNavigationRoutes.includes(location.pathname) && user;
