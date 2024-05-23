@@ -55,7 +55,7 @@ const AdminHome = ({ adminProps }) => {
   const dashboardOutput = dashboard.map(
     (dash, index) =>
       role === "admin" && (
-        <div key={index}>
+        <li key={index}>
           {position === "Administrator" ? (
             <li>
               <Link to={dash.link}>
@@ -77,7 +77,7 @@ const AdminHome = ({ adminProps }) => {
               </Link>
             </li>
           )}
-        </div>
+        </li>
       )
   );
 
